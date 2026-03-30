@@ -27,7 +27,6 @@ export const catalog: CatalogSection[] = [
     title: 'Produce',
     items: [
       'Avocados',
-      'Baby Carrots',
       'Bananas',
       'Blueberries',
       'Broccoli',
@@ -41,6 +40,7 @@ export const catalog: CatalogSection[] = [
       'Onions',
       'Peppers',
       'Potatoes',
+      'Sweet Potatoes',
       'Raspberries',
       'Spinach',
       'Spring Mix',
@@ -81,6 +81,7 @@ export const catalog: CatalogSection[] = [
       'Diced Tomatoes',
       'Frozen Vegetables',
       'Granola',
+      'Pasta',
       'Peanut Butter',
       'Pickle Chips',
       'Soy Sauce',

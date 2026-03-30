@@ -13,7 +13,6 @@ Eggs
 
 ## Produce
 Avocados
-Baby Carrots
 Bananas
 Blueberries
 Broccoli
@@ -27,6 +26,7 @@ Mushrooms
 Onions
 Peppers
 Potatoes
+Sweet Potatoes
 Raspberries
 Spinach
 Spring Mix
@@ -61,6 +61,7 @@ Croutons
 Diced Tomatoes
 Frozen Vegetables
 Granola
+Pasta
 Peanut Butter
 Pickle Chips
 Soy Sauce
