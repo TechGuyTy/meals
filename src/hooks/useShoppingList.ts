@@ -59,6 +59,20 @@ export function useShoppingList() {
     })
   }, [])
 
+  const toggleItemByLabel = useCallback((sectionId: string, label: string) => {
+    const trimmed = label.trim()
+    if (!trimmed) return
+    const norm = normalize(trimmed)
+    setItems((prev) => {
+      const existing = prev.find((i) => normalize(i.label) === norm)
+      if (existing) return prev.filter((i) => i.id !== existing.id)
+      return [
+        ...prev,
+        { id: crypto.randomUUID(), label: trimmed, sectionId },
+      ]
+    })
+  }, [])
+
   const removeItem = useCallback((id: string) => {
     setItems((prev) => prev.filter((i) => i.id !== id))
   }, [])
@@ -68,5 +82,5 @@ export function useShoppingList() {
     [items],
   )
 
-  return { items, addItem, removeItem, hasLabel }
+  return { items, addItem, toggleItemByLabel, removeItem, hasLabel }
 }

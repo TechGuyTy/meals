@@ -39,8 +39,8 @@ export function StockSheet({ onBack, onPick, hasOnList }: Props) {
           </button>
         </div>
         <p className="mt-3 font-mono text-xs leading-snug text-muted">
-          Tap a line to queue it. Duplicates are ignored. Collapse a section if you
-          do not need it this trip.
+          Tap a line to toggle it on your list. Collapse a section if you do not
+          need it this trip.
         </p>
       </header>
     ),
@@ -56,20 +56,20 @@ export function StockSheet({ onBack, onPick, hasOnList }: Props) {
           const isOpen = expanded[section.id] !== false
           return (
             <section key={section.id} className="border-b border-border last:border-b-0">
-              <div className="flex items-start gap-2 py-3">
-                <button
-                  type="button"
-                  onClick={() => toggle(section.id)}
-                  className="mt-0.5 shrink-0 font-mono text-xs text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                  aria-expanded={isOpen}
-                  aria-controls={`section-${section.id}`}
-                >
+              <button
+                type="button"
+                onClick={() => toggle(section.id)}
+                className="flex w-full items-start gap-2 py-3 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                aria-expanded={isOpen}
+                aria-controls={`section-${section.id}`}
+              >
+                <span className="mt-0.5 shrink-0 font-mono text-xs text-accent">
                   {isOpen ? '[−]' : '[+]'}
-                </button>
+                </span>
                 <h2 className="font-sans text-base font-semibold tracking-tight text-text">
                   {section.title}
                 </h2>
-              </div>
+              </button>
 
               {isOpen && (
                 <ul id={`section-${section.id}`} className="pb-2">
@@ -79,20 +79,19 @@ export function StockSheet({ onBack, onPick, hasOnList }: Props) {
                       <li key={label}>
                         <button
                           type="button"
-                          disabled={onList}
                           onClick={() => onPick(section.id, label)}
                           className={`flex w-full items-center justify-between gap-3 border-t border-border py-2 pl-7 text-left font-mono text-sm transition-colors focus-visible:outline-none ${
                             i % 2 === 1 ? 'bg-surface/40' : ''
                           } ${
                             onList
-                              ? 'cursor-not-allowed text-muted line-through'
+                              ? 'text-muted line-through hover:bg-surface/70 active:bg-surface'
                               : 'text-text hover:bg-surface/70 active:bg-surface'
                           }`}
                         >
                           <span className="min-w-0">{label}</span>
                           {onList ? (
                             <span className="shrink-0 font-sans text-xs text-muted">
-                              on list
+                              remove
                             </span>
                           ) : (
                             <span className="shrink-0 font-sans text-xs text-accent">

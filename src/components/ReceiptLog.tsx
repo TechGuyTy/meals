@@ -14,7 +14,7 @@ export function ReceiptLog({ items, onRemove, onAddItems }: Props) {
     <div className="mx-auto flex min-h-dvh max-w-md flex-col px-4 pb-8 pt-6">
       <header className="mb-6 border-b border-border pb-4">
         <p className="font-mono text-xs tracking-wide text-muted uppercase">
-          Running log
+          Get in. Get out.
         </p>
         <div className="mt-1 flex items-end justify-between gap-3">
           <h1 className="font-sans text-2xl font-semibold tracking-tight text-text">

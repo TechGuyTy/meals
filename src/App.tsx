@@ -7,7 +7,7 @@ type View = 'home' | 'edit'
 
 function App() {
   const [view, setView] = useState<View>('home')
-  const { items, addItem, removeItem, hasLabel } = useShoppingList()
+  const { items, toggleItemByLabel, removeItem, hasLabel } = useShoppingList()
 
   return view === 'home' ? (
     <ReceiptLog
@@ -18,7 +18,7 @@ function App() {
   ) : (
     <StockSheet
       onBack={() => setView('home')}
-      onPick={addItem}
+      onPick={toggleItemByLabel}
       hasOnList={hasLabel}
     />
   )
