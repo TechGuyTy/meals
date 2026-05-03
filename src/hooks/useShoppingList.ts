@@ -77,10 +77,16 @@ export function useShoppingList() {
     setItems((prev) => prev.filter((i) => i.id !== id))
   }, [])
 
+  const removeItemsBySection = useCallback((sectionId: string) => {
+    setItems((prev) => prev.filter((i) => i.sectionId !== sectionId))
+  }, [])
+
+  const clearList = useCallback(() => setItems([]), [])
+
   const hasLabel = useCallback(
     (label: string) => items.some((i) => normalize(i.label) === normalize(label)),
     [items],
   )
 
-  return { items, addItem, toggleItemByLabel, removeItem, hasLabel }
+  return { items, addItem, toggleItemByLabel, removeItem, removeItemsBySection, clearList, hasLabel }
 }

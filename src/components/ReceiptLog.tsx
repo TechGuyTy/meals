@@ -1,14 +1,16 @@
-import { layoutShoppingListForHome } from '../data/catalog'
+import { layoutShoppingListForHome, type CatalogSection } from '../data/catalog'
 import type { ListItem } from '../hooks/useShoppingList'
 
 type Props = {
   items: ListItem[]
+  catalog: CatalogSection[]
   onRemove: (id: string) => void
+  onClear: () => void
   onAddItems: () => void
 }
 
-export function ReceiptLog({ items, onRemove, onAddItems }: Props) {
-  const sections = layoutShoppingListForHome(items)
+export function ReceiptLog({ items, catalog, onRemove, onClear, onAddItems }: Props) {
+  const sections = layoutShoppingListForHome(items, catalog)
 
   return (
     <div className="mx-auto flex min-h-dvh max-w-md flex-col px-4 pb-8 pt-6">
@@ -20,13 +22,24 @@ export function ReceiptLog({ items, onRemove, onAddItems }: Props) {
           <h1 className="font-sans text-2xl font-semibold tracking-tight text-text">
             Groceries
           </h1>
-          <button
-            type="button"
-            onClick={onAddItems}
-            className="shrink-0 border border-accent/40 bg-accent/15 px-3 py-1.5 font-sans text-sm font-medium text-accent transition-colors hover:bg-accent/25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-          >
-            Add items
-          </button>
+          <div className="flex shrink-0 items-center gap-3">
+            {items.length > 0 && (
+              <button
+                type="button"
+                onClick={onClear}
+                className="font-sans text-sm font-medium text-muted underline-offset-2 hover:text-text hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              >
+                Clear
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={onAddItems}
+              className="border border-accent/40 bg-accent/15 px-3 py-1.5 font-sans text-sm font-medium text-accent transition-colors hover:bg-accent/25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            >
+              Add items
+            </button>
+          </div>
         </div>
       </header>
 

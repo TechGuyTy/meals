@@ -6,7 +6,7 @@ export type CatalogSection = {
   items: string[]
 }
 
-export const catalog: CatalogSection[] = [
+export const defaultCatalog: CatalogSection[] = [
   {
     id: 'protein',
     title: 'Protein',
@@ -96,7 +96,7 @@ export const catalog: CatalogSection[] = [
   },
 ]
 
-// --- Layout (single source: `catalog` order + titles) ---
+// --- Layout (single source: `defaultCatalog` order + titles) ---
 
 export const UNCATEGORIZED_ID = 'uncategorized'
 
@@ -105,9 +105,9 @@ function normLabel(label: string): string {
 }
 
 /** First matching section wins if a label ever appeared twice in the catalog. */
-const labelToSectionId: Map<string, string> = (() => {
+const defaultLabelToSectionId: Map<string, string> = (() => {
   const m = new Map<string, string>()
-  for (const section of catalog) {
+  for (const section of defaultCatalog) {
     for (const item of section.items) {
       const key = normLabel(item)
       if (!m.has(key)) m.set(key, section.id)
@@ -116,9 +116,9 @@ const labelToSectionId: Map<string, string> = (() => {
   return m
 })()
 
-/** Resolves a catalog item label to its section id, or `uncategorized`. */
+/** Resolves a catalog item label to its section id using the default catalog, or `uncategorized`. Used for migration only. */
 export function resolveSectionIdForLabel(label: string): string {
-  return labelToSectionId.get(normLabel(label)) ?? UNCATEGORIZED_ID
+  return defaultLabelToSectionId.get(normLabel(label)) ?? UNCATEGORIZED_ID
 }
 
 export type ListItemWithSection = {
@@ -139,6 +139,7 @@ export type HomeSection = {
  */
 export function layoutShoppingListForHome(
   items: ListItemWithSection[],
+  catalog: CatalogSection[],
 ): HomeSection[] {
   const bySection = new Map<string, ListItemWithSection[]>()
   for (const row of items) {
